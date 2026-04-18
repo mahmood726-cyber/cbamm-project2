@@ -1,0 +1,157 @@
+---
+title: "Advanced Meta-Analysis Methods in CBAMM"
+author: "CBAMM Development Team"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Advanced Meta-Analysis Methods in CBAMM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(cbamm)
+```
+
+# Advanced Meta-Analysis Methods
+
+The CBAMM package now includes cutting-edge meta-analysis techniques:
+
+## 1. Individual Participant Data (IPD) Meta-Analysis
+
+IPD meta-analysis uses raw patient-level data for more precise estimates:
+
+```{r ipd-example, eval=FALSE}
+# Simulate IPD data
+ipd_data <- simulate_ipd_data(n_studies = 5, n_patients_per_study = 100)
+
+# Perform IPD meta-analysis
+result <- ipd_meta_analysis(
+  ipd_data = ipd_data,
+  outcome = "outcome",
+  treatment = "treatment",
+  covariates = c("age"),
+  method = "one-stage",
+  model_type = "random"
+)
+
+summary(result)
+```
+
+## 2. Diagnostic Test Accuracy Meta-Analysis
+
+Synthesize diagnostic test performance across studies:
+
+```{r diagnostic-example, eval=FALSE}
+# Simulate diagnostic data
+dta_data <- simulate_dta_data(n_studies = 10)
+
+# Perform diagnostic accuracy meta-analysis
+result <- diagnostic_accuracy(
+  data = dta_data,
+  TP = "TP", FP = "FP", FN = "FN", TN = "TN",
+  study_id = "study_id",
+  method = "bivariate"
+)
+
+summary(result)
+```
+
+## 3. Living Systematic Review
+
+Implement sequential meta-analysis with stopping boundaries:
+
+```{r living-example, eval=FALSE}
+# Initial studies
+initial_data <- simulate_sequential_data(n_studies = 5)
+
+# Create living review
+living_ma <- living_systematic_review(
+  initial_data = initial_data,
+  effect_size = "effect",
+  variance = "variance",
+  study_id = "study_id",
+  method = "sequential",
+  boundaries = "obrien-fleming",
+  alpha = 0.05,
+  power = 0.80
+)
+
+# Update with new evidence
+new_study <- simulate_sequential_data(n_studies = 1, start_id = 6)
+updated_ma <- update_living_review(living_ma, new_study)
+
+summary(updated_ma)
+```
+
+## 4. Prediction Intervals
+
+Calculate prediction intervals for future studies:
+
+```{r prediction-example, eval=FALSE}
+# After running a meta-analysis
+ma_result <- list(effect = 0.5, se = 0.1, k = 10)
+
+# Calculate prediction interval
+pred_int <- calculate_prediction_interval(
+  ma_result = ma_result,
+  tau2 = 0.04,
+  level = 0.95
+)
+
+print(pred_int$prediction_interval)
+```
+
+## 5. Cross-Design Synthesis
+
+Combine RCTs with observational studies:
+
+```{r cross-design-example, eval=FALSE}
+# Simulate data
+rct_data <- data.frame(
+  study = 1:5,
+  effect = rnorm(5, 0.5, 0.1),
+  variance = runif(5, 0.01, 0.04)
+)
+
+obs_data <- data.frame(
+  study = 6:10,
+  effect = rnorm(5, 0.6, 0.15),
+  variance = runif(5, 0.02, 0.06)
+)
+
+# Perform cross-design synthesis
+result <- cross_design_synthesis(
+  rct_data = rct_data,
+  obs_data = obs_data,
+  bias_model = "additive"
+)
+
+print(result$combined)
+```
+
+## Unified Interface
+
+Use the `advanced_meta_analysis()` function for any advanced method:
+
+```{r unified-example, eval=FALSE}
+# IPD analysis
+result <- advanced_meta_analysis(
+  data = ipd_data,
+  analysis_type = "ipd",
+  outcome = "outcome",
+  treatment = "treatment"
+)
+
+# Diagnostic accuracy
+result <- advanced_meta_analysis(
+  data = dta_data,
+  analysis_type = "diagnostic",
+  TP = "TP", FP = "FP", FN = "FN", TN = "TN"
+)
+```
+

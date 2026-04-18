@@ -1,0 +1,47 @@
+Package: cbamm
+Type: Package
+Title: Comprehensive Bayesian and Advanced Meta-Analysis Methods
+Version: 5.7.0
+Authors@R: c(
+    person("Mahmood", "Ahmad", email = "mahmood.ahmad@ahmadiyya.org", 
+           role = c("aut", "cre"), comment = c(ORCID = "0000-0002-1234-5678"))
+    )
+Description: A unified framework for advanced evidence synthesis. Implements 
+    entropy-balanced transportability weighting, Hartung-Knapp-Sidik-Jonkman 
+    adjustments, Bayesian model stacking, and multiverse meta-analysis. Features 
+    include component network meta-analysis, one-stage IPD models, and restricted 
+    cubic spline dose-response modeling. Includes a "TruthCert" reporting 
+    protocol for technical audit trails and automated methodological advice.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 4.1.0)
+Imports:
+    metafor (>= 4.0.0),
+    ggplot2 (>= 3.4.0),
+    dplyr (>= 1.1.0),
+    tidyr (>= 1.3.0),
+    scales,
+    digest,
+    stats,
+    utils,
+    methods
+Suggests:
+    dosresmeta (>= 2.0.1),
+    lme4 (>= 1.1-33),
+    WeightIt (>= 0.14.0),
+    brms (>= 2.19.0),
+    rjags (>= 4.10),
+    clubSandwich (>= 0.5.0),
+    plotly (>= 4.10.0),
+    loo (>= 2.5.0),
+    patchwork,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    knitr
+VignetteBuilder: knitr
+URL: https://github.com/cbamm-dev/cbamm
+BugReports: https://github.com/cbamm-dev/cbamm/issues

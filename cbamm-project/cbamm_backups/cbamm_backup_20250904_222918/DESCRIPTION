@@ -1,0 +1,38 @@
+Package: cbamm
+Type: Package
+Title: Comprehensive bayesian and advanced meta-analysis methods
+Version: 0.1.0
+Authors@R: c(
+    person("CBAMM", "Developer", email = "cbamm.dev@example.com", 
+           role = c("aut", "cre"))
+    )
+Description: Implements advanced meta-analysis methods including network 
+    meta-analysis, Bayesian approaches, and comprehensive sensitivity analyses.
+    Provides transportability weighting for external validity, publication bias
+    correction through PET-PEESE and selection models, robust variance estimation,
+    and automated methodological guidance. Features intelligent method selection,
+    multiple performance modes, and extensive utility functions for effect size
+    conversion and statistical formatting.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 4.1.0)
+Imports:
+    metafor (>= 4.0.0),
+    dplyr (>= 1.0.0),
+    ggplot2 (>= 3.4.0),
+    tidyr (>= 1.3.0),
+    stats,
+    utils,
+    methods
+Suggests: Suggests: Suggests: Suggests:, gridExtra, patchwork, scales, igraph, shiny, rmarkdown, plotly, DT, htmlwidgets, ggplot2, ggrepel, ggridges, hexbin
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    covr
+VignetteBuilder: knitr
+URL: https://github.com/cbamm-dev/cbamm
+BugReports: https://github.com/cbamm-dev/cbamm/issues

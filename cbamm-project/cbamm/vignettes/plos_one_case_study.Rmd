@@ -1,0 +1,114 @@
+---
+title: "CBAMM Case Study: Advanced Evidence Synthesis for PLOS ONE"
+author: "Mahmood et al."
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{CBAMM Case Study}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(cbamm)
+library(ggplot2)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+## Introduction
+
+This vignette demonstrates the core features of the `cbamm` package as described in the PLOS ONE submission. We focus on four key pillars:
+1. Transportability to target populations.
+2. Multiverse analysis for robustness.
+3. Component Network Meta-Analysis (CNMA).
+4. One-Stage IPD models.
+
+## 1. Transportability and Core Analysis
+
+We simulate a dataset of 15 cardiology RCTs. Our goal is to pool the results but adjust for a target population that is older and has a higher proportion of females than the average study.
+
+```{r transport}
+# Simulate data
+set.seed(123)
+data <- simulate_cbamm_data(n_studies = 15)
+
+# Define target population
+target_pop <- list(
+  age_mean = 72,
+  female_pct = 0.65,
+  bmi_mean = 28,
+  charlson = 2.5
+)
+
+# Run comprehensive analysis
+results <- cbamm(data, target_population = target_pop, performance_mode = "fast")
+
+# Print methodological advice
+results$advisor_recommendations$methodological
+```
+
+## 2. Multiverse Analysis
+
+To ensure our conclusions aren't dependent on specific τ² estimators, we perform a multiverse sweep.
+
+```{r multiverse}
+# Results already computed in the main cbamm() call
+mv_df <- results$multiverse
+head(mv_df)
+
+# Visualize the multiverse
+ggplot(mv_df, aes(x = estimate, y = estimator, color = subset)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_vline(xintercept = 0.5, linetype = "dashed") +
+  theme_minimal() +
+  labs(title = "Effect Estimate Multiverse")
+```
+
+## 3. Component Network Meta-Analysis
+
+For complex interventions, we decompose treatments into additive components.
+
+```{r cnma}
+# Mock data for combination therapy
+data_cnma <- data.frame(
+  study_id = rep(1:5, each = 2),
+  treatment = c("A", "Placebo", "B", "Placebo", "A + B", "A", "A + B", "Placebo", "B", "A"),
+  effect = c(0.5, 0, 0.3, 0, 0.8, 0.4, 0.9, 0, 0.4, 0.6),
+  se = 0.1
+)
+
+result_cnma <- network_meta_analysis(data_cnma, studies="study_id", treatments="treatment",
+                                    effect_size="effect", std_error="se",
+                                    reference="Placebo", model="component")
+
+# Individual component effects
+result_cnma$results$component_effects
+```
+
+## 4. One-Stage IPD Models
+
+Finally, we analyze individual participant data using a mixed-effects model.
+
+```{r ipd}
+# Simulate IPD for 3 studies
+ipd_list <- simulate_ipd_data(n_studies = 3, n_patients = 50)
+
+# Run one-stage random-effects model
+result_ipd <- ipd_meta_analysis(ipd_list, method = "one-stage", model_type = "random")
+
+print(result_ipd)
+```
+
+## Conclusion
+
+CBAMM provides a unified, robust, and transparent framework for modern evidence synthesis, as verified by our TruthCert reporting protocol.
+
+```{r report, eval=FALSE}
+# Generate final TruthCert report
+create_cbamm_report(results, filename = "PLOS_ONE_Case_Study.html")
+```

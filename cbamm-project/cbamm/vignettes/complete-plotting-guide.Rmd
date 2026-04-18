@@ -1,0 +1,119 @@
+---
+title: "Complete Plotting Guide for CBAMM"
+author: "CBAMM Package"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Complete Plotting Guide for CBAMM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 10,
+  fig.height = 6,
+  eval = FALSE
+)
+```
+
+# Complete Plotting Guide for CBAMM
+
+This guide covers all plotting functions available in the CBAMM package.
+
+## Cumulative Meta-Analysis Plots
+
+```{r cumulative}
+library(cbamm)
+data(cumulative_example_data)
+result <- cumulative_meta_analysis(cumulative_example_data, order_by = "year")
+
+# Dashboard view
+create_cumulative_dashboard(result)
+
+# Evidence trajectory
+plot_evidence_trajectory(result)
+
+# Stability assessment
+plot_stability_assessment(result)
+
+# Forest evolution
+plot_forest_evolution(result)
+```
+
+## Forest Plot Variations
+
+```{r forest}
+# Classic forest plot
+forest_plot_classic(data)
+
+# Quality-colored forest plot
+forest_plot_quality(data)
+
+# Bubble forest plot
+forest_plot_bubble(data)
+
+# Lollipop forest plot
+forest_plot_lollipop(data)
+```
+
+## Journal-Specific Forest Plots
+
+```{r journal}
+# NEJM style
+forest_plot_nejm(data)
+
+# Lancet style
+forest_plot_lancet(data)
+
+# RevMan style
+forest_plot_revman(data)
+```
+
+## Funnel Plot Variations
+
+```{r funnel}
+# Classic funnel plot
+funnel_plot_classic(data)
+
+# Contour-enhanced funnel plot
+funnel_plot_contour(data)
+
+# Regression funnel plot
+funnel_plot_regression(data)
+
+# Bubble funnel plot
+funnel_plot_bubble(data)
+```
+
+## Network Meta-Analysis Plots
+
+```{r network}
+# Enhanced network plot
+plot_network_enhanced(nma_data)
+
+# League table heatmap
+plot_league_heatmap(nma_data)
+```
+
+## Customizable Plotting
+
+```{r custom}
+# Custom forest plot
+forest_plot_custom(data, 
+                  point_shape = "triangle",
+                  point_color = "darkgreen",
+                  left_label = "Favors Control",
+                  right_label = "Favors Treatment")
+
+# Custom funnel plot
+funnel_plot_custom(data,
+                  point_shape = "square",
+                  add_contours = TRUE,
+                  color_by = "study_quality")
+```
+
+This comprehensive plotting system makes CBAMM the most advanced meta-analysis visualization package available in R.
+

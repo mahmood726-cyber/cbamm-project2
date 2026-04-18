@@ -1,0 +1,48 @@
+---
+title: "Getting Started with CBAMM"
+author: "CBAMM Package"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with CBAMM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5,
+  eval = FALSE
+)
+```
+
+# Getting Started with CBAMM
+
+The CBAMM package provides comprehensive meta-analysis capabilities including cumulative meta-analysis.
+
+## Installation and Loading
+
+```{r eval=FALSE}
+# Install from CRAN (when available)
+# install.packages("cbamm")
+
+# Load the package
+library(cbamm)
+```
+
+## Quick Example
+
+```{r eval=FALSE}
+# Load example data
+data(cumulative_example_data)
+
+# Run cumulative meta-analysis
+result <- cumulative_meta_analysis(cumulative_example_data, order_by = "year")
+print(result)
+```
+
+This provides a foundation for meta-analysis research with R.
+

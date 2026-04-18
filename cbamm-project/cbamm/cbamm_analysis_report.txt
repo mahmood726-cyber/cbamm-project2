@@ -1,0 +1,61 @@
+================================================================================
+CBAMM PACKAGE ANALYSIS REPORT
+Generated: 2025-09-06 14:31:35 
+================================================================================
+
+PACKAGE INFORMATION
+-------------------
+Package: cbamm 
+Version: 0.1.0 
+Title: Comprehensive bayesian and advanced meta-analysis methods 
+
+DIRECTORY STRUCTURE
+-------------------
+R           :  38 files (208 KB)
+man         : 163 files (82 KB)
+tests       :   6 files (10 KB)
+vignettes   :   5 files (9.4 KB)
+data        :   2 files (2.1 KB)
+inst        :   3 files (13 KB)
+
+FUNCTION STATISTICS
+-------------------
+Total functions: 162 
+Exported: 19 
+Internal: 143 
+S3 methods: 9 
+
+EXPORTED FUNCTIONS
+------------------
+- bayesian_meta_analysis 
+- bayesian_meta_analysis_fixed 
+- calculate_prediction_interval 
+- calculate_prediction_interval_fixed 
+- cbamm 
+- cross_design_synthesis 
+- cross_design_synthesis_unified 
+- diagnostic_accuracy 
+- ipd_meta_analysis 
+- launch_cbamm_dashboard 
+- living_systematic_review 
+- p_curve_analysis 
+- publication_bias_suite 
+- simulate_cbamm_data 
+- simulate_dta_data 
+- simulate_ipd_data 
+- simulate_sequential_data 
+- time_series_meta 
+- update_living_review 
+
+TEST COVERAGE
+-------------
+test-advanced.R               :  3 tests,   6 expectations
+test-comprehensive.R          :  4 tests,  16 expectations
+test-core.R                   : 15 tests,  32 expectations
+test-diagnostic.R             :  1 tests,   3 expectations
+test-ipd.R                    :  1 tests,   3 expectations
+test-living.R                 :  1 tests,   3 expectations
+
+================================================================================
+Report saved to: cbamm_analysis_report.txt 
+================================================================================

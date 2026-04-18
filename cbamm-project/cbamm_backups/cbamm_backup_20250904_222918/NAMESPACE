@@ -1,0 +1,136 @@
+# Generated manually to resolve roxygen2 parsing conflicts
+
+# S3 method exports
+S3method(plot,cbamm_results)
+S3method(print,cbamm_config)
+S3method(print,cbamm_results)
+S3method(summary,cbamm_results)
+S3method(print,cbamm_network)
+S3method(summary,cbamm_network)
+S3method(plot,cbamm_network)
+
+# Core function exports
+export(cbamm)
+export(cbamm_config)
+export(update_config)
+export(cbamm_fast)
+export(cbamm_novelty_notes)
+export(network_meta_analysis)
+
+# Meta-analysis function exports
+export(robust_rma)
+export(report_meta_result)
+export(pet_peese)
+export(run_publication_bias_sensitivity)
+
+# Utility function exports
+export(convert_effect_size)
+export(se_to_var)
+export(var_to_se)
+export(compute_robust_variance)
+export(format_p)
+export(format_ci)
+export(calculate_i_squared)
+export(summarize_weights)
+export(detect_outliers_iqr)
+export(create_summary_table)
+export(simulate_cbamm_data)
+
+# Weight function exports
+export(compute_transport_weights)
+export(compute_analysis_weights)
+export(apply_grade_weighting)
+
+# Cumulative meta-analysis exports
+export(cumulative_meta_analysis)
+S3method(print,cbamm_cumulative)
+S3method(summary,cbamm_cumulative)
+S3method(plot,cbamm_cumulative)
+
+# Enhanced cumulative plotting exports
+export(create_cumulative_dashboard)
+export(plot_evidence_trajectory)
+export(plot_stability_assessment)
+export(plot_forest_evolution)
+
+# Network meta-analysis plotting exports
+export(plot_network_enhanced)
+export(plot_league_heatmap)
+export(plot_treatment_ranking)
+export(plot_nma_forest)
+export(plot_inconsistency)
+
+# Core meta-analysis plotting exports
+export(plot_funnel_enhanced)
+export(create_ma_dashboard)
+export(plot_influence_analysis)
+export(plot_outlier_detection)
+export(plot_publication_bias_suite)
+
+# Unified plotting framework exports
+export(cbamm_plot)
+export(create_cbamm_report)
+export(launch_interactive_plots)
+export(show_plot_gallery)
+
+# Network meta-analysis plotting exports
+export(plot_network_enhanced)
+export(plot_league_heatmap)
+export(plot_treatment_ranking)
+export(plot_nma_forest)
+export(plot_inconsistency)
+
+# Core meta-analysis plotting exports
+export(plot_funnel_enhanced)
+export(create_ma_dashboard)
+export(plot_influence_analysis)
+export(plot_outlier_detection)
+export(plot_publication_bias_suite)
+
+# Unified plotting framework exports
+export(cbamm_plot)
+export(create_cbamm_report)
+export(launch_interactive_plots)
+export(show_plot_gallery)
+
+# ============================================================================
+# CBAMM COMPREHENSIVE PLOTTING EXPORTS
+# ============================================================================
+
+# Forest plot variations
+export(forest_plot_classic)
+export(forest_plot_quality)
+export(forest_plot_subgroups)
+export(forest_plot_bubble)
+export(forest_plot_lollipop)
+
+# Funnel plot variations
+export(funnel_plot_classic)
+export(funnel_plot_contour)
+export(funnel_plot_regression)
+export(funnel_plot_bubble)
+
+# Journal-specific forest plots
+export(forest_plot_nejm)
+export(forest_plot_lancet)
+export(forest_plot_revman)
+
+# Network plot variations
+export(plot_network_enhanced)
+export(plot_league_heatmap)
+
+# Customizable plot functions
+export(forest_plot_custom)
+export(funnel_plot_custom)
+
+# Cumulative meta-analysis plots (already exported)
+# export(create_cumulative_dashboard)
+# export(plot_evidence_trajectory)
+# export(plot_stability_assessment)
+# export(plot_forest_evolution)
+
+# Unified plotting framework
+export(cbamm_plot)
+export(create_cbamm_report)
+export(launch_interactive_plots)
+export(show_plot_gallery)

@@ -1,0 +1,32 @@
+# Generated manually to resolve roxygen2 parsing conflicts
+
+# S3 method exports
+S3method(plot,cbamm_results)
+S3method(print,cbamm_config)
+S3method(print,cbamm_results)
+S3method(summary,cbamm_results)
+
+# Function exports
+export(apply_grade_weighting)
+export(calculate_i_squared)
+export(cbamm)
+export(cbamm_config)
+export(cbamm_fast)
+export(cbamm_novelty_notes)
+export(compute_analysis_weights)
+export(compute_robust_variance)
+export(compute_transport_weights)
+export(convert_effect_size)
+export(create_summary_table)
+export(detect_outliers_iqr)
+export(format_ci)
+export(format_p)
+export(pet_peese)
+export(report_meta_result)
+export(robust_rma)
+export(run_publication_bias_sensitivity)
+export(se_to_var)
+export(simulate_cbamm_data)
+export(summarize_weights)
+export(update_config)
+export(var_to_se)

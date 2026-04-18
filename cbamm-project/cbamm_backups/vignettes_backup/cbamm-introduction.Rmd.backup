@@ -1,0 +1,371 @@
+---
+title: "Comprehensive Bayesian and Advanced Meta-Analysis Methods (CBAMM)"
+author: "CBAMM Development Team"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{Comprehensive Bayesian and Advanced Meta-Analysis Methods (CBAMM)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5,
+  fig.align = "center"
+)
+```
+
+## Overview
+
+The CBAMM package provides comprehensive methods for conducting sophisticated meta-analyses using Bayesian and advanced statistical approaches. The package integrates multiple analytical methodologies within a unified framework, enabling researchers to conduct rigorous evidence synthesis across diverse research domains.
+
+## Key Features
+
+CBAMM offers several advanced methodological capabilities:
+
+- **Comprehensive Meta-Analysis**: Traditional and advanced meta-analytical methods with robust variance estimation
+- **Network Meta-Analysis**: Comparative effectiveness research across multiple interventions
+- **Bayesian Integration**: Hierarchical modeling with model stacking and prior specification
+- **Publication Bias Assessment**: PET-PEESE correction and selection model approaches
+- **Transport Analysis**: External validity assessment through transportability weighting
+- **Sensitivity Analysis**: Comprehensive robustness evaluation across methodological choices
+- **Automated Guidance**: Intelligent recommendations for methodological approaches
+
+## Installation
+
+```{r eval=FALSE}
+# From CRAN (when available)
+install.packages("cbamm")
+
+# Development version
+devtools::install_github("cbamm-dev/cbamm")
+```
+
+```{r}
+library(cbamm)
+```
+
+## Basic Meta-Analysis
+
+### Standard Meta-Analysis Workflow
+
+The core `cbamm()` function provides comprehensive meta-analysis with intelligent method selection:
+
+```{r eval=FALSE}
+# Perform comprehensive meta-analysis
+result <- cbamm(sim_data)
+
+# View results
+summary(result)
+plot(result)
+```
+
+### Simulated Data Example
+
+```{r}
+# Generate simulated meta-analysis data
+sim_data <- simulate_cbamm_data()
+
+# Examine data structure
+head(sim_data)
+cat("Data dimensions:", dim(sim_data), "\n")
+cat("Columns:", paste(names(sim_data), collapse = ", "), "\n")
+```
+
+The simulated data includes study identifiers, effect sizes, standard errors, and various study characteristics that demonstrate the package analytical capabilities.
+
+### Configuration Options
+
+CBAMM provides flexible configuration for analytical approaches:
+
+```{r}
+# Create custom configuration
+config <- cbamm_config()
+print(config)
+
+# Modify configuration for specific analyses
+fast_config <- update_config(config, 
+                            bayesian = FALSE, 
+                            transport_weighting = FALSE)
+```
+
+## Network Meta-Analysis
+
+### Basic Network Analysis
+
+Network meta-analysis enables comparison of multiple treatments through direct and indirect evidence:
+
+```{r}
+# Load network example data
+data(network_example_data)
+
+# Examine network structure
+head(network_example_data)
+cat("Number of studies:", length(unique(network_example_data$study_id)), "\n")
+cat("Treatments:", paste(unique(network_example_data$treatment), collapse = ", "), "\n")
+```
+
+```{r eval=FALSE}
+# Perform network meta-analysis
+nma_result <- network_meta_analysis(
+  data = network_example_data,
+  studies = "study_id",
+  treatments = "treatment",
+  effect_size = "effect",
+  std_error = "se"
+)
+
+# View treatment effects
+print(nma_result$results$treatment_effects)
+
+# View pairwise comparisons
+head(nma_result$results$pairwise_comparisons)
+```
+
+### Network Analysis Features
+
+The network meta-analysis implementation provides:
+
+- **Automatic Reference Selection**: Optimal reference treatment identification
+- **Connectivity Assessment**: Network structure validation
+- **Inconsistency Evaluation**: Direct versus indirect evidence comparison
+- **Treatment Rankings**: Probability-based treatment ordering
+- **Visualization Support**: Network diagrams and forest plots
+
+### Model Options
+
+```{r eval=FALSE}
+# Random effects model (default)
+nma_random <- network_meta_analysis(
+  data = network_example_data,
+  studies = "study_id",
+  treatments = "treatment",
+  effect_size = "effect",
+  std_error = "se",
+  model = "random"
+)
+
+# Fixed effects model
+nma_fixed <- network_meta_analysis(
+  data = network_example_data,
+  studies = "study_id",
+  treatments = "treatment", 
+  effect_size = "effect",
+  std_error = "se",
+  model = "fixed"
+)
+```
+
+## Advanced Analytical Methods
+
+### Publication Bias Assessment
+
+Multiple approaches for evaluating publication bias:
+
+```{r eval=FALSE}
+# PET-PEESE analysis
+bias_result <- pet_peese(sim_data)
+summary(bias_result)
+
+# Comprehensive publication bias sensitivity
+bias_sensitivity <- run_publication_bias_sensitivity(sim_data)
+```
+
+### Transport Analysis
+
+Assess external validity through transportability weighting:
+
+```{r eval=FALSE}
+# Compute transport weights
+transport_weights <- compute_transport_weights(
+  data = sim_data,
+  target_population = target_characteristics
+)
+
+# Apply transport weighting in analysis
+transport_result <- cbamm(sim_data, 
+                         transport_weights = transport_weights)
+```
+
+## Utility Functions
+
+### Effect Size Conversion
+
+```{r}
+# Convert between effect size metrics
+effect_sizes <- c(0.2, 0.5, 0.8)
+converted <- convert_effect_size(effect_sizes)
+print(converted)
+```
+
+### Variance and Standard Error Conversion
+
+```{r}
+# Convert between standard errors and variances
+se_values <- c(0.1, 0.2, 0.3)
+variances <- se_to_var(se_values)
+se_back <- var_to_se(variances)
+
+print(data.frame(
+  original_se = se_values,
+  variance = variances,
+  converted_se = se_back
+))
+```
+
+### Statistical Formatting
+
+```{r}
+# Format p-values
+p_values <- c(0.001, 0.023, 0.156, 0.892)
+formatted_p <- format_p(p_values)
+print(formatted_p)
+
+# Format confidence intervals
+ci_formatted <- format_ci(0.25, 0.10, 0.40)
+print(ci_formatted)
+```
+
+## Visualization
+
+### Forest Plots
+
+```{r eval=FALSE}
+# Basic forest plot
+plot(result, type = "forest")
+
+# Network forest plot
+plot(nma_result, type = "forest")
+```
+
+### Network Diagrams
+
+```{r eval=FALSE}
+# Network structure visualization
+plot(nma_result, type = "network")
+
+# Treatment ranking plots
+plot(nma_result, type = "ranking")
+```
+
+## Performance Considerations
+
+### Computational Efficiency
+
+CBAMM provides multiple performance modes:
+
+```{r eval=FALSE}
+# Fast analysis for large datasets
+fast_result <- cbamm_fast(large_dataset)
+
+# Standard comprehensive analysis
+standard_result <- cbamm(dataset)
+```
+
+## Methodological Guidance
+
+### Study Quality Assessment
+
+```{r}
+# Calculate I-squared heterogeneity
+i_squared <- calculate_i_squared(sim_data$yi, sim_data$se)
+cat("I-squared:", round(i_squared, 2), "%\n")
+
+# Detect potential outliers
+outliers <- detect_outliers_iqr(sim_data$yi)
+cat("Potential outliers:", sum(outliers), "\n")
+```
+
+### Robust Variance Estimation
+
+```{r eval=FALSE}
+# Robust meta-analysis
+robust_result <- robust_rma(sim_data)
+summary(robust_result)
+```
+
+## Reporting and Documentation
+
+### Summary Tables
+
+```{r eval=FALSE}
+# Create publication-ready summary
+summary_table <- create_summary_table(result)
+print(summary_table)
+```
+
+### Results Reporting
+
+```{r eval=FALSE}
+# Formatted results for manuscripts
+report <- report_meta_result(result)
+print(report)
+```
+
+## Integration with Other Packages
+
+CBAMM works seamlessly with the R meta-analysis ecosystem:
+
+```{r eval=FALSE}
+# Integration with metafor
+metafor_result <- robust_rma(sim_data, method = "REML")
+
+# Compatibility with other packages
+summary_weights <- summarize_weights(result)
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**Data Format Requirements**:
+- Study identifiers: `study_id` column
+- Effect sizes: `yi` column  
+- Standard errors: `se` column
+
+**Network Analysis Requirements**:
+- Connected network structure
+- Minimum three treatments
+- Adequate studies per comparison
+
+### Error Messages
+
+Common error messages and solutions:
+
+```{r eval=FALSE}
+# Missing required columns
+# Solution: Ensure data has study_id, yi, se columns
+
+# Network connectivity issues  
+# Solution: Verify all treatments connected through studies
+
+# Convergence problems
+# Solution: Try different estimation methods or priors
+```
+
+## Citing CBAMM
+
+When using CBAMM in research, please cite:
+
+```
+CBAMM Development Team (2025). CBAMM: Comprehensive Bayesian and Advanced 
+Meta-Analysis Methods. R package version 0.1.0.
+```
+
+## Getting Help
+
+- **Documentation**: Use `help(package = "cbamm")` for function documentation
+- **Issues**: Report bugs and request features through package repository
+- **Community**: Join discussions on meta-analysis methodology and implementation
+
+---
+
+The CBAMM package represents a comprehensive platform for advanced meta-analysis, providing researchers with sophisticated tools for evidence synthesis while maintaining accessibility for applied research applications.

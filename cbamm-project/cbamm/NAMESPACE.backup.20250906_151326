@@ -1,0 +1,62 @@
+# Core functions
+export(cbamm)
+export(simulate_cbamm_data)
+# Advanced methods - IPD
+export(ipd_meta_analysis)
+export(simulate_ipd_data)
+# Advanced methods - Diagnostic
+export(diagnostic_accuracy)
+export(simulate_dta_data)
+# Advanced methods - Living Review
+export(living_systematic_review)
+export(update_living_review)
+export(simulate_sequential_data)
+# Advanced methods - Other
+export(calculate_prediction_interval)
+export(cross_design_synthesis)
+# Machine Learning
+# Visualizations
+# Reports
+# Dashboard
+# Bayesian (if exists)
+export(bayesian_meta_analysis)
+# Time series (if exists)
+export(time_series_meta)
+# Bias toolkit (if exists)
+export(publication_bias_suite)
+export(p_curve_analysis)
+# S3 methods
+S3method(print, cbamm_ipd)
+S3method(print, cbamm_dta)
+S3method(print, cbamm_living)
+S3method(print, cbamm_bayesian)
+S3method(print, cbamm_timeseries)
+S3method(print, cbamm_bias_suite)
+S3method(summary, cbamm_ipd)
+S3method(summary, cbamm_dta)
+S3method(summary, cbamm_living)
+# Fixed wrapper functions
+export(cross_design_synthesis_unified)
+export(calculate_prediction_interval_fixed)
+export(bayesian_meta_analysis_fixed)
+export(launch_cbamm_dashboard)
+export(network_meta_analysis)
+export(validate_network_inputs)
+export(validate_network_structure)
+export(is_network_connected)
+export(prepare_network_data)
+export(run_frequentist_network_ma)
+export(extract_nma_results)
+export(run_basic_nma)
+export(assess_network_inconsistency)
+export(run_bayesian_network_ma)
+export(print.cbamm_network)
+export(summary.cbamm_network)
+export(plot.cbamm_network)
+export(plot_forest_network)
+export(plot_network_diagram)
+export(plot_network_enhanced)
+export(plot_nma_forest)
+export(plot_funnel_enhanced)
+export(plot_influence_analysis)
+export(plot_outlier_detection)

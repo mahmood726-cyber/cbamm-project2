@@ -1,0 +1,93 @@
+---
+title: "Cumulative Meta-Analysis with CBAMM"
+author: "CBAMM Package"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Cumulative Meta-Analysis with CBAMM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+# Introduction to Cumulative Meta-Analysis
+
+Cumulative meta-analysis is a powerful technique for assessing how evidence accumulates over time as studies are added sequentially to a meta-analysis. This vignette demonstrates how to use the CBAMM package for cumulative meta-analysis.
+
+## Loading the Package and Data
+
+```{r load}
+# Load the package (use devtools::load_all() during development)
+library(cbamm)
+data(cumulative_example_data)
+head(cumulative_example_data)
+```
+
+## Basic Cumulative Analysis
+
+```{r basic}
+# Cumulative analysis ordered by publication year
+result <- cumulative_meta_analysis(cumulative_example_data, order_by = "year")
+print(result)
+```
+
+## Plotting Results
+
+```{r plots, eval=FALSE}
+# Plot cumulative estimates
+plot(result, type = "estimate")
+
+# Plot confidence interval evolution
+plot(result, type = "ci")
+
+# Plot precision evolution
+plot(result, type = "precision")
+
+# Plot heterogeneity evolution
+plot(result, type = "heterogeneity")
+```
+
+## Different Ordering Methods
+
+```{r ordering}
+# Order by sample size (largest first)
+result_size <- cumulative_meta_analysis(cumulative_example_data, 
+                                       order_by = "sample_size", 
+                                       order_direction = "descending")
+
+# Order by precision
+result_precision <- cumulative_meta_analysis(cumulative_example_data, 
+                                            order_by = "precision")
+```
+
+## Different Methods
+
+```{r methods}
+# Fixed effects
+result_fixed <- cumulative_meta_analysis(cumulative_example_data, 
+                                        order_by = "year", 
+                                        method = "fixed")
+
+# Bayesian
+result_bayesian <- cumulative_meta_analysis(cumulative_example_data, 
+                                           order_by = "year", 
+                                           method = "bayesian")
+```
+
+## Interpreting Results
+
+The cumulative meta-analysis provides several key insights:
+
+- **Effect size evolution**: How the pooled effect size changes as studies accumulate
+- **Stability assessment**: Whether the evidence has stabilized
+- **Evidence sufficiency**: Whether accumulated evidence is sufficient for conclusions
+- **Precision tracking**: How confidence intervals narrow over time
+

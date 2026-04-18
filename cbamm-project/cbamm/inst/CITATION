@@ -1,0 +1,8 @@
+bibentry(bibtype = "Article",
+         title = "CBAMM: An Integrated R Package for Comprehensive Bayesian and Advanced Meta-Analysis with Transportability and Model Stacking",
+         author = person(c("Mahmood", "et al.")),
+         journal = "PLOS ONE",
+         year = "2026",
+         note = "In Press",
+         url = "https://github.com/mahmood789/cbamm",
+         textVersion = "Mahmood et al. (2026). CBAMM: An Integrated R Package for Comprehensive Bayesian and Advanced Meta-Analysis with Transportability and Model Stacking. PLOS ONE, In Press.")
