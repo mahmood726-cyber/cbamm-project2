@@ -18,9 +18,19 @@ simulate_cbamm_data <- function(n_rct = NULL,
     n_obs <- n_studies - n_rct
     n_mr <- 0L
   } else {
-    if (is.null(n_rct)) n_rct <- 18L
-    if (is.null(n_obs)) n_obs <- 18L
-    if (is.null(n_mr)) n_mr <- 8L
+    # When the caller explicitly specifies any study-type count, an unspecified
+    # count defaults to 0 (the requested composition is taken literally).
+    # Only when NO count is given at all do we fall back to the full default mix.
+    explicit_any <- !is.null(n_rct) || !is.null(n_obs) || !is.null(n_mr)
+    if (explicit_any) {
+      if (is.null(n_rct)) n_rct <- 0L
+      if (is.null(n_obs)) n_obs <- 0L
+      if (is.null(n_mr)) n_mr <- 0L
+    } else {
+      n_rct <- 18L
+      n_obs <- 18L
+      n_mr <- 8L
+    }
   }
 
   if (!is.null(true_effect)) {

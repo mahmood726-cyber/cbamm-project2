@@ -15,7 +15,7 @@ test_that("IPD simulation works", {
 test_that("diagnostic accuracy works", {
   dta_data <- simulate_dta_data(n_studies = 3)
   result <- diagnostic_accuracy(dta_data, TP = "TP", FP = "FP", FN = "FN", TN = "TN")
-  expect_true(result$sensitivity >= 0 && result$sensitivity <= 1)
-  expect_true(result$specificity >= 0 && result$specificity <= 1)
+  expect_true(result$summary$sensitivity >= 0 && result$summary$sensitivity <= 1)
+  expect_true(result$summary$specificity >= 0 && result$summary$specificity <= 1)
 })
 

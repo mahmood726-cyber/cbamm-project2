@@ -22,91 +22,13 @@ calculate_prediction_interval <- function(effect, se, tau2 = 0, level = 0.95) {
   ))
 }
 
-#' Simulate IPD Data
-#' @export
-simulate_ipd_data <- function(n_studies = 5, n_patients = 100, effect = 0.5) {
-  ipd_list <- list()
-  for (i in 1:n_studies) {
-    n <- n_patients
-    treatment <- rbinom(n, 1, 0.5)
-    outcome <- effect * treatment + rnorm(n)
-    ipd_list[[i]] <- data.frame(
-      study_id = i,
-      patient_id = 1:n,
-      treatment = treatment,
-      outcome = outcome
-    )
-  }
-  return(ipd_list)
-}
-
-#' Simple IPD Meta-Analysis
-#' @export
-ipd_meta_analysis <- function(ipd_data, outcome = "outcome", treatment = "treatment") {
-  # Combine all data
-  all_data <- do.call(rbind, ipd_data)
-  
-  # Simple fixed effects model
-  model <- lm(as.formula(paste(outcome, "~", treatment)), data = all_data)
-  
-  # Extract results
-  coef_summary <- summary(model)$coefficients
-  trt_row <- which(rownames(coef_summary) == treatment)
-  
-  result <- list(
-    estimate = coef_summary[trt_row, 1],
-    se = coef_summary[trt_row, 2],
-    p_value = coef_summary[trt_row, 4],
-    ci_lower = coef_summary[trt_row, 1] - 1.96 * coef_summary[trt_row, 2],
-    ci_upper = coef_summary[trt_row, 1] + 1.96 * coef_summary[trt_row, 2],
-    model = model,
-    data = all_data
-  )
-  
-  class(result) <- "cbamm_ipd"
-  return(result)
-}
-
-#' Simulate Diagnostic Test Data
-#' @export
-simulate_dta_data <- function(n_studies = 10, sens = 0.8, spec = 0.9) {
-  TP <- rbinom(n_studies, 100, sens)
-  FN <- 100 - TP
-  TN <- rbinom(n_studies, 100, spec)
-  FP <- 100 - TN
-  
-  return(data.frame(
-    study_id = 1:n_studies,
-    TP = TP, FP = FP, FN = FN, TN = TN
-  ))
-}
-
-#' Simple Diagnostic Accuracy Analysis
-#' @export
-diagnostic_accuracy <- function(data, TP = "TP", FP = "FP", FN = "FN", TN = "TN") {
-  tp <- data[[TP]]
-  fp <- data[[FP]]
-  fn <- data[[FN]]
-  tn <- data[[TN]]
-  
-  # Calculate sensitivity and specificity
-  sensitivity <- tp / (tp + fn)
-  specificity <- tn / (tn + fp)
-  
-  result <- list(
-    sensitivity = mean(sensitivity),
-    specificity = mean(specificity),
-    sens_ci = quantile(sensitivity, c(0.025, 0.975)),
-    spec_ci = quantile(specificity, c(0.025, 0.975)),
-    studies = data.frame(
-      sensitivity = sensitivity,
-      specificity = specificity
-    )
-  )
-  
-  class(result) <- "cbamm_dta"
-  return(result)
-}
+# NOTE: The simplified stub implementations of simulate_ipd_data(),
+# ipd_meta_analysis(), simulate_dta_data() and diagnostic_accuracy() that
+# previously lived here have been removed. They duplicated (and, because they
+# loaded earlier alphabetically, were silently shadowed by) the canonical,
+# fuller implementations in R/ipd_meta_analysis.R and R/diagnostic_accuracy.R.
+# Keeping both copies caused stale tests to bind to the wrong API contract.
+# The canonical files are the single source of truth for these functions.
 
 #' Simulate Sequential Data
 #' @export

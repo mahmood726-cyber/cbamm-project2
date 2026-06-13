@@ -82,6 +82,18 @@ validate_cbamm_data <- function(data,
     stop(error_msg, call. = FALSE)
   }
   
+  # Check column types: yi and se must be numeric
+  if (!is.numeric(data$yi)) {
+    stop("Column 'yi' (effect sizes) must be numeric.\n",
+         "  You provided: ", class(data$yi)[1],
+         call. = FALSE)
+  }
+  if (!is.numeric(data$se)) {
+    stop("Column 'se' (standard errors) must be numeric.\n",
+         "  You provided: ", class(data$se)[1],
+         call. = FALSE)
+  }
+
   # Check for NA values
   na_in_yi <- sum(is.na(data$yi))
   na_in_se <- sum(is.na(data$se))
