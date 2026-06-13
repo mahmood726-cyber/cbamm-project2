@@ -75,6 +75,13 @@ test_that("effect size conversion works", {
   n <- c(50, 60, 40)
   hedges_g <- convert_effect_size(yi, "Cohen_d", "Hedges_g", n = n)
   expect_true(all(hedges_g < yi))  # Hedges' g should be smaller
+
+  # Test log odds ratio to Cohen's d (Cox/Hasselblad-Hedges: d = logOR * sqrt(3)/pi)
+  log_or <- c(0.5, 1.0, -0.7)
+  d <- convert_effect_size(log_or, "log_OR", "Cohen_d")
+  expect_equal(d, log_or * sqrt(3) / pi, tolerance = 1e-8)
+  # sanity: |d| < |log_OR| because sqrt(3)/pi ~= 0.5513 < 1
+  expect_true(all(abs(d) < abs(log_or)))
 })
 
 test_that("variance conversion functions work", {

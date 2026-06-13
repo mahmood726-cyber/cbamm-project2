@@ -61,9 +61,9 @@ convert_effect_size <- function(yi, from = "Cohen_d", to = "Hedges_g", ...) {
     return(yi * j)
   }
   
-  # Log odds ratio to Cohen's d
+  # Log odds ratio to Cohen's d (Cox/Hasselblad-Hedges: d = logOR * sqrt(3)/pi)
   if (from == "log_OR" && to == "Cohen_d") {
-    return(yi * pi / sqrt(3))
+    return(yi * sqrt(3) / pi)
   }
   
   # Add more conversions as needed
